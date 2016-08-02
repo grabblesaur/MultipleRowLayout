@@ -1,4 +1,4 @@
-package recyclerview.sriyank.com.recyclerview.app;
+package recyclerview.sriyank.com.recyclerview.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

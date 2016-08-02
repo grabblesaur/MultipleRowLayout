@@ -1,36 +1,48 @@
 package recyclerview.sriyank.com.recyclerview.app;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import recyclerview.sriyank.com.recyclerview.R;
+import recyclerview.sriyank.com.recyclerview.adapter.RecyclerAdapter;
 import recyclerview.sriyank.com.recyclerview.model.Landscape;
 
-/**
- * Demo for Multiple Rows Layout in Recycler View
- * */
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
 		setUpToolbar();
+
+        setUpDrawer();
 
 		setUpRecyclerView();
 	}
 
-	private void setUpToolbar() {
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setTitle("Multiple Rows Layout Demo");
-		toolbar.inflateMenu(R.menu.menu_main);
+    private void setUpToolbar() {
+        mToolbar.setTitle("Multiple Rows Layout Demo");
+		mToolbar.inflateMenu(R.menu.menu_main);
 	}
+
+    private void setUpDrawer() {
+		NavigationDrawerFragment fragment = (NavigationDrawerFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.nav_drwr_fragment);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        fragment.setUpDrawer(R.id.nav_drwr_fragment, drawerLayout, mToolbar);
+    }
 
 	private void setUpRecyclerView() {
 
